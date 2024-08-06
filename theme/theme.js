@@ -1,11 +1,14 @@
 'use client'
+
+// theme/theme.js
+
 import { createTheme } from '@mui/material/styles';
 
 const theme = createTheme({
   palette: {
     mode: 'dark',
     primary: {
-      main: '#1a73e8',
+      main: '#FFFFFF', // White color for buttons
     },
     background: {
       default: '#202124',
@@ -42,6 +45,11 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           textTransform: 'none',
+          color: '#202124', // Dark color text on white button
+          backgroundColor: '#FFFFFF', // White color for button
+          '&:hover': {
+            backgroundColor: '#f1f3f4', // Slightly darker white for hover
+          },
         },
       },
     },

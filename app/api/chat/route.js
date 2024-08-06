@@ -1,5 +1,7 @@
+// app/api/chat/route.js
+
 import { NextResponse } from 'next/server';
-import { OpenAI } from 'openai';
+import { Configuration, OpenAIApi } from 'openai';
 
 export const config = {
   runtime: 'experimental-edge',
@@ -7,19 +9,28 @@ export const config = {
 
 export async function POST(req) {
   try {
-    const { messages } = await req.json();
-    
+    const body = await req.json();
+    console.log('Received payload:', body);
+
+    const { messages } = body;
+
     if (!messages) {
+      console.error('No messages found in the request');
       return NextResponse.json({ error: 'No messages found' }, { status: 400 });
     }
 
-    const openai = new OpenAI(process.env.OPENAI_API_KEY);
+    const configuration = new Configuration({
+      apiKey: process.env.OPENAI_API_KEY,
+    });
+    const openai = new OpenAIApi(configuration);
 
     const response = await openai.createChatCompletion({
-      model: 'gpt-3.5-turbo', // Ensure this is a valid model you have access to
+      model: 'gpt-3.5-turbo',
       messages: messages,
       stream: true,
     });
+
+    console.log('OpenAI response:', response);
 
     const reader = response.body.getReader();
     const decoder = new TextDecoder();
@@ -40,7 +51,8 @@ export async function POST(req) {
       headers: { 'Content-Type': 'text/plain' },
     });
   } catch (error) {
-    console.error('Error:', error);
-    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+    console.error('Error message:', error.message);
+    console.error('Error stack:', error.stack);
+    return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }

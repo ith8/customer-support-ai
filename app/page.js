@@ -1,14 +1,14 @@
-'use client'
+'use client';
 
 import React, { useState, useRef, useEffect } from 'react';
-import { Box, Stack, TextField, Button, Paper } from '@mui/material';
+import { Box, Stack, TextField, Button, Paper, Container } from '@mui/material';
 import styles from './page.module.css';
 
 export default function Home() {
   const [messages, setMessages] = useState([
     {
       role: 'assistant',
-      content: "Hi! I'm the Headstarter support assistant. How can I help you today?",
+      content: "Hi! How can I help you today?",
     },
   ]);
   const [message, setMessage] = useState('');
@@ -30,8 +30,10 @@ export default function Home() {
     setMessages((prevMessages) => [
       ...prevMessages,
       { role: 'user', content: message },
-      { role: 'assistant', content: '' },
     ]);
+
+    const payload = { messages: [...messages, { role: 'user', content: message }] };
+    console.log('Sending payload:', payload);
 
     try {
       const response = await fetch('/api/chat', {
@@ -39,7 +41,7 @@ export default function Home() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify([...messages, { role: 'user', content: message }]),
+        body: JSON.stringify(payload),
       });
 
       if (!response.ok) {
@@ -82,76 +84,55 @@ export default function Home() {
   };
 
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        height: '100vh',
-        backgroundColor: 'background.default',
-        color: 'text.primary',
-        padding: 2,
-      }}
-    >
-      <Stack
-        sx={{
-          flex: 1,
-          overflowY: 'auto',
-          marginBottom: 2,
-        }}
-      >
-        {messages.map((message, index) => (
-          <Paper
-            key={index}
+    <Container maxWidth="md" sx={{ display: 'flex', flexDirection: 'column', height: '100vh', padding: 0 }}>
+      <Box sx={{ flex: 1, overflowY: 'auto', padding: 2 }}>
+        <Stack spacing={2}>
+          {messages.map((message, index) => (
+            <Paper
+              key={index}
+              className={`${styles.message} ${
+                message.role === 'user' ? styles.messageUser : styles.messageAssistant
+              }`}
+            >
+              {message.content}
+            </Paper>
+          ))}
+          <div ref={messagesEndRef} />
+        </Stack>
+      </Box>
+      <Box sx={{ padding: 2, backgroundColor: '#202124' }}>
+        <Stack direction="row" spacing={2}>
+          <TextField
+            label="Type a message..."
+            fullWidth
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            onKeyPress={handleKeyPress}
+            disabled={isLoading}
             sx={{
-              padding: 1,
-              marginBottom: 1,
-              backgroundColor: message.role === 'user' ? 'primary.main' : 'background.paper',
-              color: message.role === 'user' ? 'text.primary' : 'text.secondary',
-              alignSelf: message.role === 'user' ? 'flex-end' : 'flex-start',
+              '& .MuiOutlinedInput-root': {
+                color: 'text.primary',
+                '& fieldset': {
+                  borderColor: 'text.secondary',
+                },
+                '&:hover fieldset': {
+                  borderColor: 'text.primary',
+                },
+                '&.Mui-focused fieldset': {
+                  borderColor: 'primary.main',
+                },
+              },
             }}
+          />
+          <Button
+            variant="contained"
+            onClick={sendMessage}
+            disabled={isLoading}
           >
-            {message.content}
-          </Paper>
-        ))}
-        <div ref={messagesEndRef} />
-      </Stack>
-      <Stack direction="row" spacing={2}>
-        <TextField
-          label="Message"
-          fullWidth
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          onKeyPress={handleKeyPress}
-          disabled={isLoading}
-          sx={{
-            '& .MuiOutlinedInput-root': {
-              color: 'text.primary',
-              '& fieldset': {
-                borderColor: 'text.secondary',
-              },
-              '&:hover fieldset': {
-                borderColor: 'text.primary',
-              },
-              '&.Mui-focused fieldset': {
-                borderColor: 'primary.main',
-              },
-            },
-          }}
-        />
-        <Button
-          variant="contained"
-          onClick={sendMessage}
-          disabled={isLoading}
-          sx={{
-            backgroundColor: 'primary.main',
-            '&:hover': {
-              backgroundColor: 'primary.dark',
-            },
-          }}
-        >
-          {isLoading ? 'Sending...' : 'Send'}
-        </Button>
-      </Stack>
-    </Box>
+            {isLoading ? 'Sending...' : 'Send'}
+          </Button>
+        </Stack>
+      </Box>
+    </Container>
   );
 }

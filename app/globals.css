@@ -1,11 +1,19 @@
+/* app/globals.css */
+
 body, html, #__next {
   height: 100%;
   margin: 0;
   padding: 0;
   font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  background-color: #202124;
+  color: #e8eaed;
 }
 
 #__next {
   display: flex;
   flex-direction: column;
+}
+
+* {
+  box-sizing: border-box;
 }
