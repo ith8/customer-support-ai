@@ -2,7 +2,23 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-First, run the development server:
+First you need to obtain an API key at openai.
+
+
+Then install the dependencies:
+
+OpenAi
+
+mui
+
+next
+
+
+
+
+
+
+Run the development server:
 
 ```bash
 npm run dev
