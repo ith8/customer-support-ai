@@ -1,8 +1,33 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Code adapted from Bill Zhang
 
 ## Getting Started
 
-First, run the development server:
+First you need to obtain an API key at [openai](https://platform.openai.com/api-keys).
+
+Then install the following dependencies:
+* Create new [next app](npx create-next-app@latest)
+```bash
+npx create-next-app my-nextjs-app
+```
+Or install node:
+```bash
+brew install node
+```
+* To install [openai](https://platform.openai.com/docs/api-reference/introduction):
+```bash
+pip install openai
+```
+* To install [mui](https://mui.com/material-ui/getting-started/installation/):
+```bash
+npm install @mui/material @emotion/react @emotion/styled
+```
+
+## Add the API key
+* Create .env.local, then add the following:
+OPENA_API_KEY = replace-this-with-your-api-key
+
+
+## Run the development server:
 
 ```bash
 npm run dev
