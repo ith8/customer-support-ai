@@ -1,20 +1,20 @@
-/* app/page.module.css */
-
 .message {
-  padding: 1rem;
-  border-radius: 8px;
-  margin-bottom: 1rem;
-  max-width: 75%;
+  padding: 12px;
+  margin-bottom: 10px;
+  max-width: 80%; /* Limit the bubble width */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .messageUser {
-  background-color: #00acc1;
-  color: #e8eaed;
-  align-self: flex-end;
+  background-color: #0b93f6; /* Blue bubble for user messages */
+  color: #ffffff; /* White text for user messages */
+  align-self: flex-end; /* Align to the right */
+  border-radius: 20px 20px 0 20px; /* Rounded corners for user bubble */
 }
 
 .messageAssistant {
-  background-color: #303134;
-  color: #e8eaed;
-  align-self: flex-start;
+  background-color: #e5e5ea; /* Gray bubble for assistant messages */
+  color: #000000; /* Black text for assistant messages */
+  align-self: flex-start; /* Align to the left */
+  border-radius: 20px 20px 20px 0; /* Rounded corners for assistant bubble */
 }

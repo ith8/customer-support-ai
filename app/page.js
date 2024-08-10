@@ -78,13 +78,16 @@ export default function Home() {
         <Stack spacing={2}>
           {messages.map((message, index) => (
             <Paper
-              key={index}
-              className={`${styles.message} ${
-                message.role === 'user' ? styles.messageUser : styles.messageAssistant
-              }`}
-            >
-              {message.content}
-            </Paper>
+  key={index}
+  className={`${styles.message} ${
+    message.role === 'user' ? styles.messageUser : styles.messageAssistant
+  }`}
+  elevation={3}
+>
+  {message.content}
+</Paper>
+
+
           ))}
           <div ref={messagesEndRef} />
         </Stack>
@@ -100,7 +103,7 @@ export default function Home() {
             disabled={isLoading}
             sx={{
               '& .MuiOutlinedInput-root': {
-                color: 'text.primary',
+                color: 'activeTextColor',
                 '& fieldset': {
                   borderColor: 'text.secondary',
                 },
