@@ -1,33 +1,51 @@
-Code adapted from Bill Zhang
+# Customer Support AI
+
+**Code adapted from Bill Zhang**
+
+---
 
 ## Getting Started
 
-First you need to obtain an API key at [openai](https://platform.openai.com/api-keys).
+Follow these steps to set up the project:
 
-Then install the following dependencies:
-* Create new [next app](npx create-next-app@latest)
+### 1. Obtain an OpenAI API Key
+First, you need to obtain an API key from [OpenAI](https://platform.openai.com/).
+
+### 2. Install Dependencies
+
+#### Option 1: Create a New Next.js App
 ```bash
-npx create-next-app my-nextjs-app
+npx create-next-app@latest my-nextjs-app
 ```
-Or install node:
+
+#### Option 2: Install Node.js (If you don't have it already)
 ```bash
 brew install node
 ```
-* To install [openai](https://platform.openai.com/docs/api-reference/introduction):
-```bash
-pip install openai
+
+### 3. Install Required Packages
+
+- **OpenAI:**
+  ```bash
+  pip install openai
+  ```
+
+- **Material-UI (MUI):**
+  ```bash
+  npm install @mui/material @emotion/react @emotion/styled
+  ```
+
+### 4. Add the API Key
+
+Create a `.env.local` file in the root directory of your project and add the following:
+
+```env
+OPENAI_API_KEY=replace-this-with-your-api-key
 ```
-* To install [mui](https://mui.com/material-ui/getting-started/installation/):
-```bash
-npm install @mui/material @emotion/react @emotion/styled
-```
 
-## Add the API key
-* Create .env.local, then add the following:
-OPENA_API_KEY = replace-this-with-your-api-key
+### 5. Run the Development Server
 
-
-## Run the development server:
+You can start the server using one of the following commands:
 
 ```bash
 npm run dev
@@ -39,23 +57,30 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then, open [http://localhost:3000](http://localhost:3000) in your browser to view the application.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Editing the Project
+
+You can start editing the page by modifying `app/page.js`. The page auto-updates as you make changes.
+
+This project uses `next/font` to automatically optimize and load Inter, a custom Google Font.
+
+---
 
 ## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+To learn more about Next.js, check out the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- [Next.js Documentation](https://nextjs.org/docs) - Learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - Interactive Next.js tutorial.
+- [Next.js GitHub Repository](https://github.com/vercel/next.js) - Your feedback and contributions are welcome!
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+---
 
 ## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The easiest way to deploy your Next.js app is to use the Vercel Platform from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Check out the [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
